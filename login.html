@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+  />
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+  <script src="./Logics/login.js" defer></script>
+  <style>
+    /* Common Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "SF Pro Display", "SF Pro Icons", "Helvetica Neue", Helvetica,
+      Arial, sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #5d5dff;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    nav ul li {
+      margin: 0 1rem;
+    }
+
+    .nav-btn {
+      background-color: #4e4ed1;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .nav-btn:hover {
+      background-color: #3c3cb2;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-container {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .login-container h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: #5d5dff;
+    }
+
+    /* Floating Placeholder Styles */
+    .input-registration {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .input-registration input {
+      width: 90%;
+      padding: 25px 15px 15px 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      background-color: transparent;
+      transition: all 0.3s ease;
+    }
+
+    .input-registration input:focus {
+      outline: none;
+      border-color: #5d5dff;
+      box-shadow: 0 0 8px rgba(93, 93, 255, 0.3);
+    }
+
+    .input-registration .placeholder {
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      font-size: 1rem;
+      color: #aaa;
+      transform: translateY(-50%);
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+
+    .input-registration input:focus + .placeholder,
+    .input-registration input:not(:placeholder-shown) + .placeholder {
+      top: 10px;
+      left: 10px;
+      font-size: 0.8rem;
+      color: #5d5dff;
+    }
+
+    .login-container button {
+      background-color: #5d5dff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+
+    .login-container button:hover {
+      background-color: #3c3cb2;
+    }
+
+    footer {
+      background-color: #5d5dff;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    footer .social-icons {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    footer .social-icons a {
+      color: white;
+      font-size: 1rem;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    footer .social-icons a:hover {
+      color: #ffda79;
+      transform: scale(1.2);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Shop Owner Login</h1>
+    <nav>
+      <ul>
+        <li><button class="nav-btn" onclick="window.location.href='index.html'">Back to Home</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="login-container">
+      <h2>Enter Store Using Passcode</h2>
+      <form id="loginForm">
+        <div class="input-registration">
+          <input
+            type="password"
+            id="password"
+            placeholder=" "
+            required
+          />
+          <span class="placeholder">Enter Password</span>
+        </div>
+        <button type="submit">Login</button>
+      </form>
+      <div id="loginMessage" style="display: none;margin-top:20px; color: red;"></div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="social-icons">
+      <a href="https://www.youtube.com/watch?v=xvFZjo5PgG0" target="_blank" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://www.youtube.com/watch?v=xvFZjo5PgG0" target="_blank" aria-label="Twitter">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="https://www.youtube.com/watch?v=xvFZjo5PgG0" target="_blank" aria-label="Pinterest">
+        <i class="fab fa-pinterest"></i>
+      </a>
+    </div>
+    <p>&copy; Mera Naam</p>
+  </footer>
+</body>
+</html>

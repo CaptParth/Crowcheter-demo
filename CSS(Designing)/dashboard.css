@@ -1,0 +1,240 @@
+body {
+    font-family: "SF Pro Display", "SF Pro Icons", "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+  }
+
+  header {
+    background-color: #5d5dff;
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+  }
+  
+  #userCountBox {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 250px;
+    margin: 20px auto;
+    transition: transform 0.1s ease, color 0.1s ease;
+    text-align: center;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  #userCountBox:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+
+  table {
+    width: 80%; /* Set table width */
+    margin: 20px auto; /* Center the table */
+    border-collapse: collapse;
+    background-color: #ffffff; /* White background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Elegant shadow */
+    border-radius: 8px; /* Rounded corners */
+    overflow: hidden; /* Clip content for rounded corners */
+  }
+  
+  th, td {
+    padding: 12px 15px; /* Add padding for cells */
+    text-align: left;
+    border-bottom: 1px solid #ddd; /* Soft border */
+  }
+
+
+  th {
+    background-color: #2d3e50;
+    color: white;
+  }
+
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #5d5dff;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+
+
+  .nav-btn {
+    background-color: #4e4ed1;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .nav-btn:hover {
+    background-color: #3c3cb2;
+    transform: scale(1.05);
+  }
+
+  header {
+    background-color: #5d5dff;
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+  }
+
+  footer .social-icons {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  footer .social-icons a {
+    color: white;
+    font-size: 1rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+    text-decoration: none;
+  }
+
+  footer .social-icons a:hover {
+    color: #ffda79;
+    transform: scale(1.2);
+  }
+  th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #5d5dff;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  td {
+    color: #333;
+  }
+  
+  tr:hover {
+    background-color: #f1f1f1;
+    transition: background-color 0.3s ease;
+  }
+  
+  tr:nth-child(odd) {
+    background-color: #f9f9f9;
+  }
+  .table-controls {
+    display: flex;
+    justify-content: flex-end; /* Align everything to the right */
+    align-items: center;
+    margin-top: 10px; /* Space between table and controls */
+    width: 90%; /* Matches the table's width */
+  }
+  
+.rows-per-page select {
+  margin-left: 5px;
+  margin-right: 15px;
+  padding: 5px;
+  font-size: 14px;
+  background-color: transparent; /* Transparent background */
+  border: none; /* Remove default border */
+  outline: none; 
+}
+  
+.rows-per-page select:hover{
+  cursor:pointer;
+  border-bottom: 2px solid gray; 
+}
+  
+  .pagination {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between arrow buttons */
+  }
+  
+  .arrow-btn {
+    background: #ffffff;
+    border: 2px solid #007bff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .arrow-btn span {
+    font-size: 18px;
+    color: #007bff;
+    transition: transform 0.3s ease;
+  }
+  
+  .arrow-btn:hover span {
+    transform: scale(1.2);
+  }
+  
+  .arrow-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+  
+  .arrow-btn::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    background-color: #0056b2;
+    border-radius: 50%;
+    transform: scale(1);
+    transition: all 0.5s;
+    z-index: 0;
+  }
+  
+  .arrow-btn:active::after {
+    width: 120%;
+    height: 120%;
+    transform: scale(0);
+    transition: 0s;
+  }
+  
+  .arrow-btn span {
+    position: relative;
+    z-index: 1;
+  }

@@ -1,0 +1,84 @@
+/* Center Login Form */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 150px); /* Full height minus header and footer */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Login Container Styling */
+.login-container {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+.login-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #5d5dff;
+}
+
+/* Input Fields */
+.login-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.login-container input:focus {
+    outline: none;
+    border-color: #5d5dff;
+    box-shadow: 0 0 8px rgba(93, 93, 255, 0.3);
+}
+
+/* Submit Button */
+.login-container button {
+    background-color: #5d5dff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+}
+
+.login-container button:hover {
+    background-color: #3c3cb2;
+    transform: scale(1.05);
+}
+
+/* Hidden Label for Accessibility */
+.hidden-label {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 480px) {
+    .login-container {
+        padding: 1.5rem;
+    }
+
+    .login-container h2 {
+        font-size: 1.6rem;
+    }
+
+    .login-container button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+}

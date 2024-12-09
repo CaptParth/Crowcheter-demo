@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+
+  <!-- Firebase Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  
+  <link rel="stylesheet" href="./CSS(Designing)/dashboard.css">
+
+  <script type="module">
+    const firebaseConfig = {
+      apiKey: "AIzaSyDGSey_MzjdQCq7itOyYT-_TirO9HuJboE",
+      authDomain: "crow-demo.firebaseapp.com",
+      projectId: "crow-demo",
+      storageBucket: "crow-demo.appspot.com",
+      messagingSenderId: "406568021706",
+      appId: "1:406568021706:web:53ad96f60b63c556808e33",
+      measurementId: "G-Z0EK00LTDY"
+    };
+
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js';
+    import { getDatabase, ref, get } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js';
+    import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js';
+
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const auth = getAuth(app);
+
+    let usersData = [];
+    let currentPage = 1;
+    let rowsPerPage = 5;
+
+    function fetchAndDisplayUserData() {
+      const userRef = ref(database, 'registrations');
+      get(userRef).then((snapshot) => {
+        const users = snapshot.val();
+        if (!users) return;
+        usersData = Object.values(users);
+
+        document.getElementById('userCount').textContent = usersData.length;
+        displayPage(currentPage);
+      }).catch((error) => {
+        console.error("Error fetching user data:", error);
+      });
+    }
+
+    function displayPage(page) {
+      const start = (page - 1) * rowsPerPage;
+      const end = start + rowsPerPage;
+      const usersToDisplay = usersData.slice(start, end);
+
+      const tableBody = document.getElementById('userTableBody');
+      tableBody.innerHTML = '';
+
+      usersToDisplay.forEach(user => {
+        const row = tableBody.insertRow();
+        const emailCell = row.insertCell(0);
+        emailCell.textContent = user.email;
+      });
+
+      document.getElementById('prevPage').disabled = page === 1;
+      document.getElementById('nextPage').disabled = page * rowsPerPage >= usersData.length;
+    }
+
+    document.getElementById('prevPage').addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        displayPage(currentPage);
+      }
+    });
+
+    document.getElementById('nextPage').addEventListener('click', () => {
+      if (currentPage * rowsPerPage < usersData.length) {
+        currentPage++;
+        displayPage(currentPage);
+      }
+    });
+
+    document.getElementById('rowsPerPage').addEventListener('change', (event) => {
+      rowsPerPage = parseInt(event.target.value, 10);
+      currentPage = 1;
+      displayPage(currentPage);
+    });
+
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.href = 'login.html';
+      } else {
+        fetchAndDisplayUserData();
+      }
+    });
+  </script>
+
+</head>
+<body class="fade-in">
+  <header>
+    <h1>Mera Naam :)</h1>
+    <nav>
+      <ul>
+        <button class="nav-btn" onclick="window.location.href='index.html'" data-link="index.html">Back to Home</button>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div id="userCountBox">
+      <h2>Kitne Aadmi The</h2>
+      <p id="userCount">0</p>
+    </div>
+    <table id="userTable">
+      <thead>
+        <tr>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody id="userTableBody">
+      </tbody>
+    </table>
+
+
+    <div class="table-controls">
+      <div class="rows-per-page">
+        <label for="rowsPerPage">Rows per page:</label>
+        <select id="rowsPerPage">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+        </select>
+      </div>
+      <div class="pagination">
+        <button id="prevPage" class="arrow-btn" disabled>
+          <span>&larr;</span>
+        </button>
+        <button id="nextPage" class="arrow-btn">
+          <span>&rarr;</span>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; Mera Naam</p>
+  </footer>
+</body>
+</html>
